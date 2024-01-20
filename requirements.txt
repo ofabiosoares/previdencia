@@ -1,4 +1,5 @@
 streamlit
-matplotlib.pyplot
+matplotlib
+#matplotlib.pyplot
 pandas
 plotly.express
