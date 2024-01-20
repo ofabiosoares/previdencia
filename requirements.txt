@@ -2,4 +2,5 @@ streamlit
 matplotlib
 #matplotlib.pyplot
 pandas
-plotly.express
+plotly
+#plotly.express
