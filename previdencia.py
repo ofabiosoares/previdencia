@@ -12,7 +12,6 @@ st.set_page_config(layout= 'wide', page_title = 'aposentei!')
 
 st.title('Aposentei! E agora?')
 
-
 #Grafico do retorno acumulado:------------------------------------------------------------------------------
 
 def gera_grafico(df_simulacao, nome):
@@ -22,7 +21,7 @@ def gera_grafico(df_simulacao, nome):
     fig.update_xaxes(title = 'Tempo em meses')
     fig.update_layout(title_text = f'Como seu dinheiro vai acumulando {nome.upper()}, ao longo do tempo:', legend_title_text = '')
     fig.update_layout(showlegend = True)
-    st.plotly_chart(fig) #, use_container_width = True
+    st.plotly_chart(fig , use_container_width = True) #, use_container_width = True
     #st.write(fig)
     return(fig)
 # fim do grafico de investimentos
@@ -36,7 +35,7 @@ with col1:
     st.markdown('Então vamos lá! Preencha os dados a seguir e veja como se preparar para viver a melhor fase da sua vida!')
 
 with col2:
-    st.image('casal.jpeg',width= 450)
+    st.image('casal.jpeg',width= 450, use_column_width= True)
     st.markdown("<p style='text-align: center;'>foto: revistadorh.com.br</p>", unsafe_allow_html=True)
 
 st.divider()
