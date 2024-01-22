@@ -23,8 +23,9 @@ def gera_grafico(df_simulacao, nome):
     fig=px.bar(df_simulacao, x =df_simulacao.mes, y = ['meu dinheiro', 'montante'], color_discrete_sequence=["#FFA15A", "#636EFA"]) #EF553B
     fig.update_yaxes(title = 'Total Acumulado em R$')  
     fig.update_xaxes(title = 'Tempo em meses')
-    fig.update_layout(title_text = f'Como seu dinheiro vai acumulando {nome.upper()}, ao longo do tempo:', legend_title_text = '')
+    fig.update_layout(title_text = f'Seu dinheiro acumulando {nome.upper()}, ao longo do tempo:', legend_title_text = '')
     fig.update_layout(showlegend = True)
+
     st.plotly_chart(fig , use_container_width = True)
     st.write(' Veja a importância de pensar no longo prazo: O gráfico acima mostra :orange[em Laranja], o valor que você foi depositando no período e :blue[em Azul], o efeito do juros ao longo do tempo, aumentando de forma exponencial 🚀 o seu montante total 💵💵')
     #st.write(fig)
