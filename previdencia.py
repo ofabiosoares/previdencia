@@ -1,6 +1,6 @@
 # aquirende-previdencia
 
-#codigo gerado por fabio soares, para calculo de aposentadoria complementar
+#codigo gerado por Fabio Soares, para calculo de aposentadoria complementar
 
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -76,7 +76,7 @@ with col1:
             st.write('**Resultado** da Simulação:')
             st.write(f'Olá {nome.upper()}, seja muito bem vindo(a) ao SEU FUTURO! Aqui, nós estamos cuidando da sua Aposentadoria!')
 
-        dinheiro_inicial = st.number_input('Digite a quantidade de dinheiro inicial do Investimento:',value = None, min_value=10, placeholder= 'R$:')
+        dinheiro_inicial = st.number_input('Digite a quantidade de dinheiro inicial do Investimento:',value = None, min_value=10, placeholder= 'R$:', help = 'Digite o valor e tecle ENTER para continuar')
         
         
         if dinheiro_inicial != None:
@@ -84,14 +84,14 @@ with col1:
                 st.write('')
                 st.write('* Você vai Investir R$: :green[{:,.2f}]'.format(dinheiro_inicial).replace(',', '-').replace('.', ',').replace('-', '.'))
 
-            tempo_desejado = st.slider('Digite quantos MESES você deixará o dinheiro investido:', 0, 780, 36, step = 6)
+            tempo_desejado = st.slider('Digite quantos MESES você deixará o dinheiro investido:', 0, 780, 36, step = 6, help = 'deslize a barra para alterar o prazo ')
             if tempo_desejado != None:
                 st.write(f'**Você escolheu investir por** :red[{(tempo_desejado/12)} anos] ⌛')
         
                 with col2:
                     st.write(f'* Este valor vai ficar investido por {tempo_desejado} meses  ou :red[{(tempo_desejado/12)} anos]')
 
-                taxa = st.slider('Escolha a Taxa Mensal de Retorno do seu Investimento que você está buscando:', value = None , min_value = 0.00, max_value = 3.00,  step = 0.10, format= '%f')  
+                taxa = st.slider('Escolha a Taxa Mensal de Retorno do seu Investimento que você está buscando:', value = None , min_value = 0.00, max_value = 3.00,  step = 0.10, format= '%f', help = 'deslize a barra para alterar a taxa de JUROS ')  
                 if taxa:
         
                     with col2:
@@ -100,13 +100,13 @@ with col1:
                     
                     taxa = taxa/100 # transformei na taxa decimal para o calculo
 
-                    aporte = st.slider('Quanto de dinheiro você consegue depositar mensalmente: R$ ', min_value = 0, max_value = 10000, step = 50)
+                    aporte = st.slider('Quanto de dinheiro você consegue depositar mensalmente: R$ ', min_value = 0, max_value = 10000, step = 50, help = 'deslize a barra para informar o valor em R$ dos depositos mensais')
                     if aporte:
 
                         with col2:
                             st.write(' * Você vai depositar + R$: {:,.2f} todos os meses!'.format(aporte))
 
-                    salario_desejado = st.number_input('Digite o Salário mensal que você quer receber ao se aposentar:', value = None , format = '%.f')  
+                    salario_desejado = st.number_input('Digite o Salário mensal que você quer receber ao se aposentar:', value = None , format = '%.f', help = 'Digite o valor e tecle ENTER', placeholder= 'digite o valor e tecle ENTER')  
 
                     tempo_decorrido = 0
                     dados = []
