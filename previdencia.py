@@ -10,7 +10,11 @@ import plotly.express as px
 #configuracao da pagina:
 st.set_page_config(layout= 'wide', page_title = 'aposentei!')
 
+#ajustando o cabecalho
+st.write('<style>div.block-container{padding-top:1.5rem;}</style>', unsafe_allow_html=True)
+
 st.title('Aposentei! E agora?')
+st.subheader('Para que possamos viver a nossa melhor idade com tranquilidade, devemos pensar agora em planejar nosso futuro financeiro')
 
 #Grafico do retorno acumulado:------------------------------------------------------------------------------
 
@@ -21,7 +25,8 @@ def gera_grafico(df_simulacao, nome):
     fig.update_xaxes(title = 'Tempo em meses')
     fig.update_layout(title_text = f'Como seu dinheiro vai acumulando {nome.upper()}, ao longo do tempo:', legend_title_text = '')
     fig.update_layout(showlegend = True)
-    st.plotly_chart(fig , use_container_width = True) #, use_container_width = True
+    st.plotly_chart(fig , use_container_width = True)
+    st.write(' Veja a importância de pensar no longo prazo: O gráfico acima mostra :orange[em Laranja], o valor que você foi depositando no período e :blue[em Azul], o efeito do juros ao longo do tempo, aumentando de forma exponencial 🚀 o seu montante total 💵💵')
     #st.write(fig)
     return(fig)
 # fim do grafico de investimentos
@@ -30,13 +35,30 @@ def gera_grafico(df_simulacao, nome):
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown('Para que possamos viver a nossa "MELHOR IDADE" com tranquilidade, devemos pensar agora em planejar nosso futuro financeiro')
-    st.markdown('Para isso, vamos utilizar nosso simulador de aposentadoria, onde identificamos hoje, o que precisamos fazer para chegar no nosso futuro de forma garantida 🏖️')
-    st.markdown('Então vamos lá! Preencha os dados a seguir e veja como se preparar para viver a melhor fase da sua vida!')
+    st.write('')
+    st.markdown('O seu futuro, será fruto do que foi construído ao longo do tempo. ⌛')
+    st.markdown('Seja para manter o padrão de gastos de hoje ou melhorar o valor a receber da aposentadoria oficial,  é fundamental termos uma reserva para o nosso futuro! ')
+    st.write('')
+    st.image('renda_complementar.jpg',width= 350)
+    st.markdown("<p style='text-align: left;'>foto: inovo.org</p>", unsafe_allow_html=True)
+    st.write('')
+    st.markdown('Afinal, guardar dinheiro 💵 também é cuidar de quem você ama! E o quanto antes começarmos, menor será nosso esforço, pois os juros e o tempo irão trabalhar a nosso favor!')
+    
+    st.image('futuro.jpg',width= 350)
+    st.markdown('foto: familius.com')
 
+    #st.markdown('Para isso, vamos utilizar nosso simulador de aposentadoria, onde identificamos hoje, o que precisamos fazer para chegar no nosso futuro de forma garantida 🏖️')
+    #st.markdown('Vamos lá construir o seu futuro financeiro?')
+   # st.markdown('Use o simulador a seguir para calcular quanto de dinheiro você consegue reservar e a renda que virá no futuro, fruto desta reserva  e veja como se preparar para viver a melhor fase da sua vida!')
 with col2:
     st.image('casal.jpeg',width= 450, use_column_width= True)
     st.markdown("<p style='text-align: center;'>foto: revistadorh.com.br</p>", unsafe_allow_html=True)
+    st.write('')
+    st.write('')
+    st.markdown('Para isso, vamos utilizar nosso simulador de aposentadoria, onde identificamos hoje, o que precisamos fazer para chegar no nosso futuro de forma garantida 🏖️')
+    st.markdown('Vamos lá construir o seu futuro financeiro?')
+    st.markdown('Use o simulador a seguir para calcular quanto de dinheiro você consegue reservar e a renda que virá no futuro, fruto desta reserva  e veja como se preparar para viver a melhor fase da sua vida!')
+    
 
 st.divider()
 
