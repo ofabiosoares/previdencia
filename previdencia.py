@@ -76,7 +76,7 @@ with col1:
             st.write('**Resultado** da Simulação:')
             st.write(f'Olá {nome.upper()}, seja muito bem vindo(a) ao SEU FUTURO! Aqui, nós estamos cuidando da sua Aposentadoria!')
 
-        dinheiro_inicial = st.number_input('Digite a quantidade de dinheiro inicial do Investimento:',value = None, min_value=10, placeholder= 'R$:', help = 'Digite o valor e tecle ENTER para continuar')
+        dinheiro_inicial = st.number_input('Digite a quantidade de dinheiro inicial do Investimento:',value = None, min_value=10, placeholder= 'Digite em R$ e tecle ENTER', help = 'Digite o valor e tecle ENTER para continuar')
         
         
         if dinheiro_inicial != None:
