@@ -137,12 +137,13 @@ def gera_pdf(df_simulacao, nome,dinheiro_inicial,tempo_desejado,aporte,taxa, mon
 def gera_email(nome,email):
     meuemail = "apaolabitt@gmail.com"
     #parte do codigo para acessar a senha salva em arquivo
-    with open('senha.txt') as f:
-        senha = f.readlines()
+    #with open('senha.txt') as f:
+    #    senha = f.readlines()
+#
+ #       f.close()
 
-        f.close()
+    senha_do_email = st.secrets["db_password"]
 
-    senha_do_email = senha[0]
 
     #corpo do email
     texto = """
