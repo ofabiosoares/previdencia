@@ -5,5 +5,5 @@ pandas
 plotly
 #plotly.express
 FPDF
-smtplib
+#smtplib
 EmailMessage
