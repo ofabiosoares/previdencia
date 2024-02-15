@@ -364,9 +364,12 @@ with col1:
                                 fig = gera_grafico(df_simulacao, nome)
 
                             with col_dados:
-                                st.metric('Montante Acumulado:', value = "R$ {:,.2f} 💵 ".format(df_simulacao['montante'].iloc[-1].round(2)).replace(',', '-').replace('.', ',').replace('-', '.'))
-                                st.metric('Juros   :'          , value = "R$ {:,.2f} 🚀".format(df_simulacao['rendimento'].sum().round(2)).replace(',', '-').replace('.', ',').replace('-', '.'))
-                                st.metric('Meus depósitos   :' , value = "R$ {:,.2f} 💰 ".format(df_simulacao['meu dinheiro'].iloc[-1]).replace(',', '-').replace('.', ',').replace('-', '.'))
+                                try:
+                                    st.metric('Montante Acumulado:', value = "R$ {:,.2f} 💵 ".format(df_simulacao['montante'].iloc[-1].round(2)).replace(',', '-').replace('.', ',').replace('-', '.'))
+                                    st.metric('Juros   :'          , value = "R$ {:,.2f} 🚀".format(df_simulacao['rendimento'].sum().round(2)).replace(',', '-').replace('.', ',').replace('-', '.'))
+                                    st.metric('Meus depósitos   :' , value = "R$ {:,.2f} 💰 ".format(df_simulacao['meu dinheiro'].iloc[-1]).replace(',', '-').replace('.', ',').replace('-', '.'))
+                                except:
+                                    st.error('Nao consigo informar os dados montante, juros e meus depositos')
                             
                             #gera o pdf com os dados da simulacao
                             gera_pdf(df_simulacao, nome,dinheiro_inicial,tempo_desejado,aporte,taxa, montante, salario_mensal)
