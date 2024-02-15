@@ -41,93 +41,97 @@ def gera_grafico(df_simulacao, nome):
 #funcao para gerar o pdf para o usuario -------------------------------------------------------------
 @st.cache_data
 def gera_pdf(df_simulacao, nome,dinheiro_inicial,tempo_desejado,aporte,taxa, montante, salario_mensal):
-    meus_depositos      = df_simulacao['meu dinheiro'].iloc[-1]
-    juros               = df_simulacao['rendimento'].sum().round(2)
+    try:
 
-    # 1. Setup básico do PDF
-    #Criamos o pdf
-    pdf = FPDF('P', 'mm', (210, 297)) #pdf = FPDF()
+        meus_depositos      = df_simulacao['meu dinheiro'].iloc[-1]
+        juros               = df_simulacao['rendimento'].sum().round(2)
 
-    # Define as margens esquerda, superior, direita (em milímetros) e rodape
-    pdf.set_margins(15, 10, 15)
-    pdf.set_auto_page_break(True, margin= 5)  # 5 mm do rodapé
+        # 1. Setup básico do PDF
+        #Criamos o pdf
+        pdf = FPDF('P', 'mm', (210, 297)) #pdf = FPDF()
 
-    #Adicionamos uma nova página. antes era so um arquivo virtual
-    pdf.add_page()
+        # Define as margens esquerda, superior, direita (em milímetros) e rodape
+        pdf.set_margins(15, 10, 15)
+        pdf.set_auto_page_break(True, margin= 5)  # 5 mm do rodapé
 
-    #Setup de fonte
-    pdf.set_font('Arial', 'B', 16)
+        #Adicionamos uma nova página. antes era so um arquivo virtual
+        pdf.add_page()
 
-    # 2. Layout do pdf
+        #Setup de fonte
+        pdf.set_font('Arial', 'B', 16)
 
-    ## Título
-    pdf.cell(40, 10, '                  Análise de Simulação de Aposentadoria ')
+        # 2. Layout do pdf
 
-    ## Quebra de linha
-    pdf.ln(14)
+        ## Título
+        pdf.cell(40, 10, '                  Análise de Simulação de Aposentadoria ')
 
-    #comentarios
-    pdf.set_font('Arial', 'B', 11)
-    pdf.write(5, 'Como é bom não ter que se preocupar com dinheiro não é mesmo?')
-    pdf.ln(7.3)
-    pdf.set_font('Arial', '', 11)
-    pdf.write(5,'Imagina chegar na sua melhor idade e não ter problemas para manter o seu padrão de gastos de hoje, ou mesmo melhorar a renda\
-    a receber além da aposentadoria oficial. Para isso é fundamental termos uma reserva para o nosso futuro!')
-    pdf.ln(7.3)
-    pdf.write(5, 'Por isso, pensando no seu futuro {} e com base nos valores informados por você durante a simulação, veremos a seguir, uma análise das suas finanças para a sua MELHOR IDADE,\
-    através de uma Previdência Privada'.format(nome.upper()))
-    pdf.ln(8)
-    pdf.set_font('Times', 'B', 11)
-    pdf.cell(20, 7, 'Resultado da Simulação:')
-    pdf.ln(9)
-    pdf.set_font('Arial', '', 11)
-    pdf.write(5, 'Você escolheu investir R$: {:,.2f} por {} meses. acrescentando todos os meses R$ {:,.2f} e desejando\
-    uma taxa mensal de juros de {:.2f} %am,'.format(dinheiro_inicial,tempo_desejado,aporte,(taxa*100)).replace(',', '-').replace('.', ',').replace('-', '.'))
-    pdf.ln(6)
-    pdf.write(5,'Ao final do periodo, você terá acumulado o montante de R${:,.2f}. o que\
-    deve lhe proporcionar uma renda mensal de aproximadamente R$ {:,.2f}*'.format(montante,salario_mensal).replace(',', '-').replace('.', ',').replace('-', '.'))
+        ## Quebra de linha
+        pdf.ln(14)
 
-    pdf.ln(8.5)
-    pdf.image('grafico.png', w=160, h=100)
-    pdf.ln(2)
-    pdf.set_font('Arial', '', 10)
-    pdf.write(5,'Veja a importância de pensar no longo prazo: O gráfico acima mostra em Laranja, o valor que você foi depositando no período e em Azul,\
-    o efeito do juros ao longo do tempo, que aumenta o seu montante total.')
+        #comentarios
+        pdf.set_font('Arial', 'B', 11)
+        pdf.write(5, 'Como é bom não ter que se preocupar com dinheiro não é mesmo?')
+        pdf.ln(7.3)
+        pdf.set_font('Arial', '', 11)
+        pdf.write(5,'Imagina chegar na sua melhor idade e não ter problemas para manter o seu padrão de gastos de hoje, ou mesmo melhorar a renda\
+        a receber além da aposentadoria oficial. Para isso é fundamental termos uma reserva para o nosso futuro!')
+        pdf.ln(7.3)
+        pdf.write(5, 'Por isso, pensando no seu futuro {} e com base nos valores informados por você durante a simulação, veremos a seguir, uma análise das suas finanças para a sua MELHOR IDADE,\
+        através de uma Previdência Privada'.format(nome.upper()))
+        pdf.ln(8)
+        pdf.set_font('Times', 'B', 11)
+        pdf.cell(20, 7, 'Resultado da Simulação:')
+        pdf.ln(9)
+        pdf.set_font('Arial', '', 11)
+        pdf.write(5, 'Você escolheu investir R$: {:,.2f} por {} meses. acrescentando todos os meses R$ {:,.2f} e desejando\
+        uma taxa mensal de juros de {:.2f} %am,'.format(dinheiro_inicial,tempo_desejado,aporte,(taxa*100)).replace(',', '-').replace('.', ',').replace('-', '.'))
+        pdf.ln(6)
+        pdf.write(5,'Ao final do periodo, você terá acumulado o montante de R${:,.2f}. o que\
+        deve lhe proporcionar uma renda mensal de aproximadamente R$ {:,.2f}*'.format(montante,salario_mensal).replace(',', '-').replace('.', ',').replace('-', '.'))
 
-    pdf.ln(8)
-    pdf.write(5,'Em resumo:')
-    pdf.ln(6)
-    pdf.set_font('Arial', 'B', 11)
-    pdf.write(5,'Seus depósitos: R$ {:,.2f}     Juros: R$ {:,.2f}      Montante Acumulado: R$ {:,.2f}'.format(meus_depositos, juros, montante).replace(',', '-').replace('.', ',').replace('-', '.'))
+        pdf.ln(8.5)
+        pdf.image('grafico.png', w=160, h=100)
+        pdf.ln(2)
+        pdf.set_font('Arial', '', 10)
+        pdf.write(5,'Veja a importância de pensar no longo prazo: O gráfico acima mostra em Laranja, o valor que você foi depositando no período e em Azul,\
+        o efeito do juros ao longo do tempo, que aumenta o seu montante total.')
 
-    pdf.ln(9)
-    pdf.set_font('Arial', '', 10)
-    pdf.write(5,'{}, Faça uma revisão nos valores que você sugeriu para a sua aposentadoria e se estiver de acordo, vamos\
-    começar agora mesmo a construir esta história juntos!'.format(nome.upper()))
-    pdf.ln(12)
+        pdf.ln(8)
+        pdf.write(5,'Em resumo:')
+        pdf.ln(6)
+        pdf.set_font('Arial', 'B', 11)
+        pdf.write(5,'Seus depósitos: R$ {:,.2f}     Juros: R$ {:,.2f}      Montante Acumulado: R$ {:,.2f}'.format(meus_depositos, juros, montante).replace(',', '-').replace('.', ',').replace('-', '.'))
 
-    # 3. logo
-    pdf.image('paola_foto.PNG', w=20, h=20)
-    pdf.ln(2)
+        pdf.ln(9)
+        pdf.set_font('Arial', '', 10)
+        pdf.write(5,'{}, Faça uma revisão nos valores que você sugeriu para a sua aposentadoria e se estiver de acordo, vamos\
+        começar agora mesmo a construir esta história juntos!'.format(nome.upper()))
+        pdf.ln(12)
 
-    # 4. Assinatura
-    pdf.set_font('Times', '', 12)
-    pdf.cell(5, 2, 'Paola Bitencourt, Educação Financeira. ')
-    pdf.ln(4)
-    pdf.set_font('Times', '', 10)
-    pdf.cell(5, 2, 'https://meuscontatos.streamlit.app')
-    pdf.ln(12)
+        # 3. logo
+        pdf.image('paola_foto.PNG', w=20, h=20)
+        pdf.ln(2)
 
-    # 5. Disclaimer
-    pdf.set_font('Arial', '', 6.5)
-    pdf.write(5,'*Obs: Renda mensal projetada c/ base na taxa de juros informada na simulação, o que pode variar o resultado a receber, em função do retorno real do seu investimento.')
-    pdf.ln(4.5)
+        # 4. Assinatura
+        pdf.set_font('Times', '', 12)
+        pdf.cell(5, 2, 'Paola Bitencourt, Educação Financeira. ')
+        pdf.ln(4)
+        pdf.set_font('Times', '', 10)
+        pdf.cell(5, 2, 'https://meuscontatos.streamlit.app')
+        pdf.ln(12)
 
-    pdf.set_font('Times', '', 8)
-    pdf.cell(5, 2, 'Todos os direitos reservados ©')
+        # 5. Disclaimer
+        pdf.set_font('Arial', '', 6.5)
+        pdf.write(5,'*Obs: Renda mensal projetada c/ base na taxa de juros informada na simulação, o que pode variar o resultado a receber, em função do retorno real do seu investimento.')
+        pdf.ln(4.5)
 
-    # 6. Output do PDF file
-    pdf.output('aposentei.pdf', 'F')
+        pdf.set_font('Times', '', 8)
+        pdf.cell(5, 2, 'Todos os direitos reservados ©')
+
+        # 6. Output do PDF file
+        pdf.output('aposentei.pdf', 'F')
+    except:
+        st.error('Problemas ao gerar a simulação em pdf!🚨 - Fale com seu Assessor!')
     return()
 #fim da funcao para gerar o pdf ----------------------------------------------------------------------
 
