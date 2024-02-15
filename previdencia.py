@@ -8,7 +8,7 @@ import plotly.express as px
 from fpdf import FPDF
 
 #para enviar por email o resultado:
-import os
+#import os
 import smtplib
 from email.message import EmailMessage
 
