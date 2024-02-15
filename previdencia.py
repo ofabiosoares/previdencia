@@ -42,7 +42,6 @@ def gera_grafico(df_simulacao, nome):
 @st.cache_data
 def gera_pdf(df_simulacao, nome,dinheiro_inicial,tempo_desejado,aporte,taxa, montante, salario_mensal):
     try:
-
         meus_depositos      = df_simulacao['meu dinheiro'].iloc[-1]
         juros               = df_simulacao['rendimento'].sum().round(2)
 
@@ -130,8 +129,9 @@ def gera_pdf(df_simulacao, nome,dinheiro_inicial,tempo_desejado,aporte,taxa, mon
 
         # 6. Output do PDF file
         pdf.output('aposentei.pdf', 'F')
+        st.success('Simulação em pdf gerada com sucesso!')
     except:
-        st.error('Problemas ao gerar a simulação em pdf!🚨 - Fale com seu Assessor!')
+        st.error('Problemas ao gerar a simulação em pdf🚨 - Fale com seu Assessor!')
     return()
 #fim da funcao para gerar o pdf ----------------------------------------------------------------------
 
